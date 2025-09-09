@@ -1,136 +1,197 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>سعد فون لجميع خدمات المحمول</title>
-  <style>
-    body {font-family: Tahoma, Arial, sans-serif;
-  margin:0;
-  padding:0;
-  direction:rtl;
-  background: linear-gradient(135deg, #ff6600, #ff3300)}
-    header {background:#ff6600; color:#fff; padding:20px; text-align:center;}
-    header img {height:200px; width:auto;}
-    nav {background:#333; color:#fff; display:flex; justify-content:center; gap:20px; padding:10px;}
-    nav a {color:#fff; text-decoration:none; font-weight:bold;}
-    section {padding:30px; background:#fff; margin:20px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
-    h2 {color:#ff6600; margin-top:0;}
-    ul {list-style:none; padding:0;}
-    ul li {margin:8px 0;}
-    .contact {text-align:center; font-size:18px;}
-    .whatsapp-btn {display:inline-block; background:#25d366; color:#fff; padding:12px 20px; border-radius:30px; text-decoration:none; font-weight:bold;}
-    .products-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px;}
-    .product-card {background:#fafafa; border:1px solid #eee; border-radius:10px; padding:15px; text-align:center;}
-    .product-card img {max-width:100%; height:200px; object-fit:cover; border-radius:8px; margin-bottom:10px;}
-    .product-card h3 {margin:5px 0; font-size:18px;}
-    .product-card p {margin:0; color:#555;}
-    .product-card {
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.product-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-.whatsapp-btn {
-  animation: pulse 1.5s infinite;
-}
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-.product-card {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s forwards;
-}
-.product-card:nth-child(1) {animation-delay: 0.2s;}
-.product-card:nth-child(2) {animation-delay: 0.4s;}
-.product-card:nth-child(3) {animation-delay: 0.6s;}
-.product-card:nth-child(4) {animation-delay: 0.8s;}
-.product-card:nth-child(5) {animation-delay: 1s;}
+<meta charset="UTF-8">
+<title>سعد فون - المتجر الإلكتروني</title>
+<style>
+body { font-family: 'Arial', sans-serif; margin:0; padding:0; direction: rtl; background: #f5f5f5; }
+header { background: linear-gradient(135deg, #000000, #222222); color: white; padding: 20px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.5);}
+header img { max-height: 500px; vertical-align: middle; border-radius: 10px;}
+nav { display: flex; justify-content: center; gap: 20px; margin: 10px 0; }
+nav a { color: white; text-decoration: none; font-weight: bold; transition: 0.3s; }
+nav a:hover { color: #ffd700; }
 
-@keyframes fadeInUp {
-  to {opacity: 1; transform: translateY(0);}
+/* شريط العروض */
+.marquee { 
+  background: #ffd700; 
+  color: #000000; 
+  padding: 10px 0; 
+  overflow: hidden; 
+  position: relative; 
+  font-weight: bold; 
+  white-space: nowrap; /* مهم عشان النص يبقى في سطر واحد */
 }
-  </style>
+
+.marquee-content { 
+  display: inline-block; 
+  padding-left: 100%; 
+  animation: marquee 15s linear infinite; 
+}
+
+@keyframes marquee { 
+  0% { transform: translateX(0%); } 
+  100% { transform: translateX(-100%); } 
+}
+.container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; padding: 20px; }
+
+.product { background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 15px; text-align: center; transition: transform 0.3s, box-shadow 0.3s; }
+.product:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.2);}
+.product img { max-width: 100%; height: auto; border-radius: 10px; }
+.product h3 { margin: 10px 0 5px; font-size: 1.1em; color: #333; }
+.product p { color: #555; font-weight: bold; }
+.add-to-cart { margin-top: 10px; padding: 10px; background: #1E90FF; color: white; border: none; cursor: pointer; border-radius: 5px; transition: 0.3s; }
+.add-to-cart:hover { background: #105ca8; }
+
+.cart { position: fixed; top: 20px; left: 20px; background: #fff; border-radius: 10px; border: 1px solid #ccc; padding: 15px; width: 300px; max-height: 400px; overflow-y: auto; display: none; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.3);}
+.cart h3 { margin-top: 0; text-align: center; }
+.cart-item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.95em; }
+.cart-total { font-weight: bold; margin-top: 10px; text-align: center; color: #1E90FF; }
+.show-cart-btn { position: fixed; top: 20px; right: 20px; padding: 12px 18px; background: #1E90FF; color: white; border: none; cursor: pointer; z-index: 1001; border-radius: 50px; font-size: 1.1em; transition: 0.3s; }
+.show-cart-btn:hover { background: #105ca8; }
+
+footer { background: #333; color: white; padding: 20px; text-align: center; margin-top: 20px; }
+.social { margin: 10px 0; }
+.social a { color: white; margin: 0 10px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+.social a:hover { color: #ffd700; }
+.branches { margin-top: 10px; color: #ffd700; font-weight: bold; text-align: center; }
+</style>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="الشعار">
-    <h1>سعد فون لجميع خدمات المحمول</h1>
-    <p>بيع وصيانة الهواتف وكل ما يلزم من اكسسوار الموبايل والكمبيوتر</p>
-  </header>
 
-  <nav>
-    <a href="#products">المنتجات</a>
-    <a href="#maintenance">الصيانة</a>
-    <a href="#accessories">الإكسسوارات</a>
-    <a href="#branches">الفروع</a>
-    <a href="#contact">اتصل بنا</a>
-  </nav>
+<header>
+    <img src="logo.png" alt="سعد فون">
+    <h1>سعد فون لجميع خدمات المحمول - المتجر الإلكتروني</h1>
+    <nav>
+        <a href="#">الرئيسية</a>
+        <a href="#">منتجات</a>
+        <a href="#">تواصل معنا</a>
+    </nav>
+</header>
 
-  <section id="products">
-    <h2>المنتجات</h2>
-    <div class="products-grid">
-      <div class="product-card">
-        <img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-14-pro-max-1.jpg" alt="iPhone 14 Pro Max">
-        <h3>iPhone 14 Pro Max</h3>
-        <p>السعر:داخل المحل</p>
-      </div>
-      <div class="product-card">
-        <img src="https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s23-ultra-5g-1.jpg" alt="Samsung Galaxy S23 Ultra">
-        <h3>Samsung Galaxy S23 Ultra</h3>
-        <p>السعر: داخل المحل</p>
-      </div>
-      <div class="product-card">
-        <img src="https://cdn.shortpixel.ai/spai/q_glossy+ret_img+to_webp/mobizil.com/wp-content/uploads/2024/03/Realme-Note-50-1.jpg" alt="Realme note 50">
-        <h3>realme note 50</h3>
-        <p>السعر: داخل المحل</p>
-      </div>
-      <div class="product-card">
-        <img src="https://fdn2.gsmarena.com/vv/pics/oppo/oppo-find-x6-pro-1.jpg" alt="Oppo Find X6 Pro">
-        <h3>Oppo Find X6 Pro</h3>
-        <p>السعر: داخل المحل</p>
-      </div>
-      <div class="product-card">
-        <img src="https://fdn2.gsmarena.com/vv/pics/huawei/huawei-p60-pro-1.jpg" alt="Huawei P60 Pro">
-        <h3>Huawei P60 Pro</h3>
-        <p>السعر: داخل المحل</p>
-      </div>
+<div class="marquee">
+  <div class="marquee-content">
+    🔥 عروض اليوم: خصومات على جميع الأجهزة المحمولة والملحقات! سارع بالشراء 🔥
+  </div>
+
+<button class="show-cart-btn" onclick="toggleCart()">🛒 العربة</button>
+
+<div class="cart" id="cart">
+    <h3>عربة التسوق</h3>
+    <div id="cart-items"></div>
+    <div class="cart-total" id="cart-total">الإجمالي: 0 جنيه</div>
+    <button onclick="checkout()" style="margin-top:10px;padding:10px 15px;background:#1E90FF;color:white;border:none;border-radius:5px;cursor:pointer;">الدفع</button>
+</div>
+
+<div class="container" id="product-container">
+    <!-- مثال للمنتجات -->
+    <div class="product">
+        <img src="https://image01.realme.net/general/20220307/1646633295536.jpg" alt="realme c35">
+        <h3>realme c35 4-128</h3>
+        <p>سعر: 5500 جنيه</p>
+        <button class="add-to-cart" onclick="addToCart('realme c35', 5500)">أضف إلى العربة</button>
     </div>
-  </section>
+    <div class="product">
+        <img src="https://image01.realme.net/general/20231017/16975274874693fed5972dc50443b98e2ed5efd366ce0.png" alt="realme c53">
+        <h3> realme c53 6-128</h3>
+        <p>سعر: 6000 جنيه</p>
+        <button class="add-to-cart" onclick="addToCart(realme c53', 6000)">أضف إلى العربة</button>
+    </div>
+   <div class="product">
+        <img src="https://cdn.kalvo.com/uploads/img/gallery/64141-oppo-a3-4g-4.jpg" alt="oppo a3 6/128">
+        <h3> oppo a3 6-128</h3>
+        <p>سعر: 7800 جنيه</p>
+        <button class="add-to-cart" onclick="addToCart(oppo a3', 7800)">أضف إلى العربة</button>
+    </div>
+ <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81cTuyhPqAL._AC_SL1500_.jpg" alt="samsung a04 ">
+        <h3> samsung a04 4/64</h3>
+        <p>سعر: 4200 جنيه</p>
+        <button class="add-to-cart" onclick="addToCart(samsung a04', 4200)">أضف إلى العربة</button>
+    </div>
+ <div class="product">
+        <img src="https://shop.samsung.com/ie/images/products/29847/34393/600x600/SM-A165FLGBEUB.png" alt="samsung a16 ">
+        <h3> samsung a16 6-128</h3>
+        <p>سعر: 7800 جنيه</p>
+        <button class="add-to-cart" onclick="addToCart(samsung a16', 7800)">أضف إلى العربة</button>
+    </div>
+<div class="product">
+        <img src="https://tse1.mm.bing.net/th/id/OIP.YvHaXzUQ_oyA_eKgyn7q8wHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="oppo reno 12f">
+        <h3> oppo reno 12f 8-128</h3>
+        <p>سعر: 18000جنيه</p>
+        <button class="add-to-cart" onclick="addToCart(oppo reno 12f', 18000)">أضف إلى العربة</button>
+    </div>
+<div class="product">
+        <img src="https://tse1.mm.bing.net/th/id/OIP.N8_XhI3_FPuV16G3JcYilgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="صب تايجر ">
+        <h3> صب تايجر tg-3100</h3>
+        <p>سعر: 850جنيه</p>
+        <button class="add-to-cart" onclick="addToCart(tg-3100', 850)">أضف إلى العربة</button>
+    </div>
+</div>
 
-  <section id="maintenance">
-    <h2>قسم الصيانة</h2>
-    <p>صيانة جميع أنواع الموبايلات باقل الاسعار مع ضمان وسرعة إنجاز.</p>
-  </section>
+<footer>
+    <p>العنوان: مدينة بدر - القاهرة</p>
+    <div class="branches">
+        الفروع: 
+الخزان بجوار كشري هند، 
+الخزان امام موقف العاصمة
+، شارع الجامعة الروسية بجوار فودافون
+، شارع الجامعة الروسية امام بوابة الجامعة
+، الزلزال بجوار طيور المحلاوي
+، الاسكان بجوار بشندي
+، مول مصر
+    </div>
+    <div class="social">
+        <a href="https://facebook.com/Sa3d.phone/" target="_blank">فيسبوك</a>
+        <a href="https://wa.me/01000440326" target="_blank">واتساب</a>
+    </div>
+    <p>طرق الدفع: فودافون كاش 01000440326 - فيزا</p>
+</footer>
 
-  <section id="accessories">
-    <h2>الإكسسوارات</h2>
-    <p>نوفر جميع إكسسوارات الموبايل والكمبيوتر (سماعات، شواحن، جرابات، اسكرينات , وصلات, كيبورد، ماوس...)</p>
-  </section>
+<script>
+let cart = [];
 
-  <section id="branches">
-    <h2>فروعنا</h2>
-    <ul>
-      <li>الخزان :بجوار كشري هند</li>
-      <li>الخزان: أمام موقف العاصمة</li>
-      <li>شارع الجامعة الروسية : مقابل الجامعة الروسية</li>
-      <li>شارع الجامعة الروسية : بجوار فرع فودافون</li>
-      <li>الإسكان : بجوار بشندي</li>
-      <li>الزلزال : بجوار طيور المحلاوي</li>
-      <li>مول مصر</li>
-    </ul>
-  </section>
+function addToCart(name, price) {
+    cart.push({name, price});
+    updateCart();
+}
 
-  <section id="contact" class="contact">
-    <h2>اتصل بنا</h2>
-    <p>📍 القاهرة - مدينة بدر</p>
-    <p>📞 01000440326</p>
-    <p>FACE https://www.facebook.com/Sa3d.phone/</p>
-    <a class="whatsapp-btn" href="https://wa.me/201000440326" target="_blank">تواصل عبر واتساب</a>
-  </section>
+function updateCart() {
+    const cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = '';
+    let total = 0;
+    cart.forEach((item, index) => {
+        total += item.price;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+            <span>${item.name} - ${item.price} جنيه</span>
+            <button onclick="removeFromCart(${index})">❌</button>
+        `;
+        cartItems.appendChild(div);
+    });
+    document.getElementById('cart-total').innerText = 'الإجمالي: ' + total + ' جنيه';
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
+
+function toggleCart() {
+    const cartDiv = document.getElementById('cart');
+    cartDiv.style.display = cartDiv.style.display === 'none' ? 'block' : 'none';
+}
+
+function checkout() {
+    if(cart.length === 0){
+        alert('العربة فارغة');
+        return;
+    }
+    let products = cart.map(p => p.name).join(', ');
+    let total = cart.reduce((sum, p) => sum + p.price, 0);
+    alert(الدفع عبر فودافون كاش: 01000440326 أو فيزا\n\nالمنتجات: ${products}\nالإجمالي: ${total} جنيه);
+}
+</script>
+
 </body>
 </html>
